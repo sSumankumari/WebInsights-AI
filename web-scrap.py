@@ -1,6 +1,6 @@
 # WebInsightAI - Intelligent URL Summarization & Question Answering Tool
 
-# STEP 1: URL Information Retrieval (Web Scraping)
+# URL Information Retrieval (Web Scraping)
 import requests
 from bs4 import BeautifulSoup
 import newspaper
@@ -27,12 +27,12 @@ def extract_text_from_html(url):
     except Exception as e:
         return str(e)
 
-# STEP 2: Save Retrieved Data to CSV
+# Save Retrieved Data to CSV
 def save_to_csv(data, filename="scraped_data.csv"):
     df = pd.DataFrame([data])
     df.to_csv(filename, mode='a', index=False, header=not pd.io.common.file_exists(filename))
 
-# STEP 3: Test URL Scraping
+# Test URL Scraping
 if __name__ == "__main__":
     url = "https://pypi.org/project/scikit-learn/"
     scraped_data = scrape_url(url)

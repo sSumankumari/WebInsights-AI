@@ -1,5 +1,3 @@
-# WebInsightAI - Intelligent URL Summarization & Question Answering Tool
-
 # URL Information Retrieval (Web Scraping)
 import requests
 from bs4 import BeautifulSoup

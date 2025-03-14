@@ -3,7 +3,7 @@ $(document).ready(function () {
         let url = $("#urlInput").val().trim();
         
         if (url === "") {
-            alert("Please enter a valid URL.");
+            alert("⚠️ Please enter a valid URL.");
             return;
         }
 
@@ -11,7 +11,7 @@ $(document).ready(function () {
         $("#result").html("");
 
         $.ajax({
-            url: "http://127.0.0.1:5000/analyze",  // Replace with your API endpoint
+            url: "/analyze",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({ url: url }),
@@ -21,7 +21,7 @@ $(document).ready(function () {
             },
             error: function () {
                 $("#loading").addClass("d-none");
-                $("#result").html(`<div class="alert alert-danger">Failed to retrieve data.</div>`);
+                $("#result").html(`<div class="alert alert-danger">❌ Failed to retrieve data.</div>`);
             }
         });
     });

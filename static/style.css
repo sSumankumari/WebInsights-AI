@@ -1,14 +1,63 @@
+/* General Styling */
 body {
-    background-color: #f8f9fa;
-    font-family: Arial, sans-serif;
+    background-color: #0A1931; /* Dark Royal Blue */
+    font-family: 'Arial', sans-serif;
+    color: white;
 }
 
+/* Centered Card Container */
 .container {
-    max-width: 600px;
+    max-width: 650px;
 }
 
+/* AI-Themed Card */
 .card {
+    background: #13274F; /* Darker Royal Blue */
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+    border: none;
+}
+
+/* Title Styling */
+.ai-title {
+    font-weight: bold;
+    color: #00FFFF; /* Neon Cyan */
+    text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.8);
+}
+
+/* URL Input Section */
+.url-input-group input {
+    border-radius: 10px 0 0 10px;
+    border: none;
+    padding: 12px;
+    background-color: #1B3A6D;
+    color: white;
+}
+
+.url-input-group .btn-ai {
+    background-color: #00FFFF; /* Neon Cyan */
+    color: #13274F; /* Dark Blue */
+    font-weight: bold;
+    border-radius: 0 10px 10px 0;
+    transition: 0.3s ease;
+}
+
+.url-input-group .btn-ai:hover {
+    background-color: #00CED1; /* Darker Cyan */
+}
+
+/* Loading Spinner */
+.spinner-border.text-cyan {
+    color: #00FFFF;
+}
+
+/* Result Styling */
+#result {
+    padding: 15px;
+    background: rgba(0, 255, 255, 0.1);
     border-radius: 10px;
-    background: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-weight: bold;
+    border-left: 4px solid #00FFFF;
 }

@@ -36,5 +36,3 @@ if __name__ == "__main__":
     scraped_data = scrape_url(url)
     save_to_csv(scraped_data)
     print("Scraped Data:", scraped_data)
-
-print("WebInsightAI - Project initialization and URL info retrieval setup complete!")

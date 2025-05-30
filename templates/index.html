@@ -1,160 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Content Analyzer - URL & PDF Intelligence</title>
-    <link rel="stylesheet" href="../static/style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Analyzer - URL &amp; PDF Intelligence</title>
+    <!-- <link rel="stylesheet" href="../static/style.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  </head>
+  <body>
     <!-- Background Animation -->
     <div class="bg-animation">
-        <div class="floating-particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
+      <div class="floating-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+      </div>
     </div>
 
     <!-- Header -->
     <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <i class="fas fa-brain"></i>
-                <span>ContentAI</span>
-            </div>
-            <div class="header-subtitle">Intelligent Content Analysis & Q&A System</div>
+      <div class="header-content">
+        <div class="logo">
+          <i class="fas fa-brain"></i>
+          <span>ContentAI</span>
         </div>
+        <div class="header-subtitle">Intelligent Content Analysis and Q&amp;A System</div>
+      </div>
     </header>
 
     <!-- Main Container -->
     <div class="main-container">
-        <!-- Left Panel - Content Input & Summary -->
-        <div class="panel left-panel" id="summaryPanel">
-            <div class="panel-header">
-                <h2><i class="fas fa-file-alt"></i> Content Analyzer</h2>
-                <div class="panel-subtitle">Upload PDF or enter URL to get intelligent summaries</div>
-            </div>
-
-            <!-- Input Section -->
-            <div class="input-section">
-                <div class="input-toggle">
-                    <button class="toggle-btn active" data-type="url">
-                        <i class="fas fa-link"></i> URL
-                    </button>
-                    <button class="toggle-btn" data-type="pdf">
-                        <i class="fas fa-file-pdf"></i> PDF
-                    </button>
-                </div>
-
-                <!-- URL Input -->
-                <div class="input-container url-input active">
-                    <div class="input-wrapper">
-                        <i class="fas fa-globe input-icon"></i>
-                        <input type="url" id="urlInput" placeholder="Enter website URL (e.g., https://example.com)" required>
-                        <button class="analyze-btn" id="analyzeUrl">
-                            <span class="btn-text">Analyze</span>
-                            <i class="fas fa-arrow-right btn-icon"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- PDF Input -->
-                <div class="input-container pdf-input">
-                    <div class="file-upload-wrapper">
-                        <input type="file" id="pdfInput" accept=".pdf" hidden>
-                        <label for="pdfInput" class="file-upload-label">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <span>Drop PDF here or click to upload</span>
-                            <div class="file-name" id="fileName"></div>
-                        </label>
-                        <button class="analyze-btn" id="analyzePdf" disabled>
-                            <span class="btn-text">Analyze PDF</span>
-                            <i class="fas fa-arrow-right btn-icon"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Loading Animation -->
-            <div class="loading-container" id="loadingContainer">
-                <div class="loading-spinner">
-                    <div class="spinner"></div>
-                    <div class="loading-text">Processing content...</div>
-                    <div class="loading-steps">
-                        <div class="step active" data-step="1">Fetching content</div>
-                        <div class="step" data-step="2">Analyzing text</div>
-                        <div class="step" data-step="3">Generating summary</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Summary Display -->
-            <div class="summary-container" id="summaryContainer">
-                <div class="summary-header">
-                    <h3><i class="fas fa-lightbulb"></i> Content Summary</h3>
-                    <div class="summary-actions">
-                        <button class="action-btn" id="copyBtn" title="Copy Summary">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                        <button class="action-btn" id="downloadBtn" title="Download Summary">
-                            <i class="fas fa-download"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="summary-content" id="summaryContent">
-                    <!-- Summary will be displayed here -->
-                </div>
-                <div class="summary-footer">
-                    <button class="chat-activate-btn" id="startChatBtn">
-                        <i class="fas fa-comments"></i>
-                        Start Q&A Chat
-                    </button>
-                </div>
-            </div>
+      <!-- Left Panel - Content Input & Summary -->
+      <div class="panel left-panel" id="summaryPanel">
+        <div class="panel-header">
+          <h2><i class="fas fa-file-alt"></i> Content Analyzer</h2>
+          <div class="panel-subtitle">Upload PDF or enter URL to get intelligent summaries</div>
         </div>
 
-        <!-- Right Panel - Chat Interface -->
-        <div class="panel right-panel" id="chatPanel">
-            <div class="panel-header">
-                <h2><i class="fas fa-robot"></i> AI Assistant</h2>
-                <div class="panel-subtitle">Ask questions about the analyzed content</div>
-                <div class="chat-status" id="chatStatus">
-                    <i class="fas fa-circle"></i>
-                    <span>Ready to chat</span>
-                </div>
-            </div>
+        <!-- Input Section -->
+        <div class="input-section">
+          <div class="input-toggle">
+            <button class="toggle-btn active" data-type="url"><i class="fas fa-link"></i> URL</button>
+            <button class="toggle-btn" data-type="pdf"><i class="fas fa-file-pdf"></i> PDF</button>
+          </div>
 
-            <!-- Chat Messages -->
-            <div class="chat-container">
-                <div class="chat-messages" id="chatMessages">
-                    <div class="welcome-message">
-                        <div class="ai-avatar">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="message-content">
-                            <p>👋 Hello! I'm your AI assistant. Once you analyze some content, I'll be ready to answer any questions you have about it.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chat Input -->
-                <div class="chat-input-container">
-                    <div class="chat-input-wrapper">
-                        <input type="text" id="chatInput" placeholder="Ask a question about the content..." disabled>
-                        <button class="send-btn" id="sendBtn" disabled>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
-                    <div class="quick-questions" id="quickQuestions">
-                        <!-- Quick question buttons will be added here -->
-                    </div>
-                </div>
+          <!-- URL Input -->
+          <div class="input-container url-input active">
+            <div class="input-wrapper">
+              <i class="fas fa-globe input-icon"></i>
+              <input type="url" id="urlInput" placeholder="Enter website URL (e.g., https://example.com)" required />
+              <button class="analyze-btn" id="analyzeUrl">
+                <span class="btn-text">Analyze</span>
+                <i class="fas fa-arrow-right btn-icon"></i>
+              </button>
             </div>
+          </div>
+
+          <!-- PDF Input -->
+          <div class="input-container pdf-input">
+            <div class="file-upload-wrapper">
+              <input type="file" id="pdfInput" accept=".pdf" hidden />
+              <label for="pdfInput" class="file-upload-label">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <span>Drop PDF here or click to upload</span>
+                <div class="file-name" id="fileName"></div>
+              </label>
+              <button class="analyze-btn" id="analyzePdf" disabled>
+                <span class="btn-text">Analyze PDF</span>
+                <i class="fas fa-arrow-right btn-icon"></i>
+              </button>
+            </div>
+          </div>
         </div>
+
+        <!-- Loading Animation -->
+        <div class="loading-container" id="loadingContainer">
+          <div class="loading-spinner">
+            <div class="spinner"></div>
+            <div class="loading-text">Processing content...</div>
+            <div class="loading-steps">
+              <div class="step active" data-step="1">Fetching content</div>
+              <div class="step" data-step="2">Analyzing text</div>
+              <div class="step" data-step="3">Generating summary</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary Display -->
+        <div class="summary-container" id="summaryContainer">
+          <div class="summary-header">
+            <h3><i class="fas fa-lightbulb"></i> Content Summary</h3>
+            <div class="summary-actions">
+              <button class="action-btn" id="copyBtn" title="Copy Summary"><i class="fas fa-copy"></i></button>
+              <button class="action-btn" id="downloadBtn" title="Download Summary"><i class="fas fa-download"></i></button>
+            </div>
+          </div>
+          <div class="summary-content" id="summaryContent">
+            <!-- Summary will be displayed here -->
+          </div>
+          <div class="summary-footer">
+            <button class="chat-activate-btn" id="startChatBtn">
+              <i class="fas fa-comments"></i>
+              Start Q&amp;A Chat
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel - Chat Interface -->
+      <div class="panel right-panel" id="chatPanel">
+        <div class="panel-header">
+          <h2><i class="fas fa-robot"></i> AI Assistant</h2>
+          <div class="panel-subtitle">Ask questions about the analyzed content</div>
+          <div class="chat-status" id="chatStatus">
+            <i class="fas fa-circle"></i>
+            <span>Ready to chat</span>
+          </div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="chat-container">
+          <div class="chat-messages" id="chatMessages">
+            <div class="welcome-message">
+              <div class="ai-avatar">
+                <i class="fas fa-robot"></i>
+              </div>
+              <div class="message-content">
+                <p>👋 Hello! I'm your AI assistant. Once you analyze some content, I'll be ready to answer any questions you have about it.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Input -->
+          <div class="chat-input-container">
+            <div class="chat-input-wrapper">
+              <input type="text" id="chatInput" placeholder="Ask a question about the content..." disabled />
+              <button class="send-btn" id="sendBtn" disabled><i class="fas fa-paper-plane"></i></button>
+            </div>
+            <div class="quick-questions" id="quickQuestions">
+              <!-- Quick question buttons will be added here -->
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Toast Notifications -->
@@ -162,9 +153,10 @@
 
     <!-- Resize Handle -->
     <div class="resize-handle" id="resizeHandle">
-        <div class="resize-line"></div>
+      <div class="resize-line"></div>
     </div>
 
-    <script src="../static/script.js"></script>
-</body>
+    <!-- <script src="../static/script.js"></script> -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
 </html>

@@ -99,6 +99,7 @@ body {
     max-width: 1400px;
     margin: 0 auto;
     position: relative;
+    min-height: 0; /* For flex children scrolling */
 }
 
 /* Panel Styles */
@@ -112,11 +113,39 @@ body {
     transition: all 0.3s ease;
 }
 
+/* --- Scrollable left panel fix --- */
 .left-panel {
     flex: 1;
     min-width: 450px;
+    height: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+.left-panel::-webkit-scrollbar {
+    width: 8px;
+}
+.left-panel::-webkit-scrollbar-thumb {
+    background: #223d63;
+    border-radius: 4px;
+}
+.left-panel::-webkit-scrollbar-track {
+    background: #19233a;
 }
 
+/* --- Scrollable summary area (optional) --- */
+.summary-container {
+    max-height: 40vh;
+    overflow-y: auto;
+    margin: 20px 30px 30px;
+    animation: slideUp 0.6s ease;
+}
+.summary-container.active {
+    display: block;
+}
+
+/* Panel header, input section, etc. */
 .right-panel {
     flex: 1;
     min-width: 450px;
@@ -152,7 +181,7 @@ body {
 
 /* Input Section */
 .input-section {
-    padding: 30px;
+    padding: 20px 30px; /* Reduced for less vertical spacing */
 }
 
 .input-toggle {
@@ -366,22 +395,12 @@ body {
     box-shadow: 0 2px 8px rgba(30, 136, 229, 0.3);
 }
 
-/* Summary Container */
-.summary-container {
-    display: none;
-    margin: 20px 30px 30px;
-    animation: slideUp 0.6s ease;
-}
-
-.summary-container.active {
-    display: block;
-}
-
+/* Content Summary tweaks (for scroll) */
 .summary-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     color: white;
 }
 
@@ -420,11 +439,11 @@ body {
 
 .summary-content {
     background: rgba(20, 35, 80, 0.6);
-    padding: 25px;
+    padding: 20px 20px 10px 20px;
     border-radius: 15px;
     color: #e3f2fd;
     line-height: 1.6;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border: 1px solid rgba(100, 150, 255, 0.2);
 }
 
@@ -728,6 +747,10 @@ body {
     height: 40px;
 }
 
+/* Utility classes for JS visibility toggling */
+.hidden { display: none !important; }
+.visible { display: block !important; }
+
 /* Animations */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
@@ -764,6 +787,9 @@ body {
     
     .left-panel, .right-panel {
         flex: none;
+        min-width: 0;
+        height: auto;
+        max-height: none;
     }
 
     .resize-handle {
@@ -783,11 +809,12 @@ body {
     }
 
     .input-section {
-        padding: 20px;
+        padding: 15px 15px;
     }
 
     .summary-container {
-        margin: 15px 20px 20px;
+        margin: 10px 15px 15px;
+        max-height: none;
     }
 
     .chat-messages {
@@ -819,19 +846,20 @@ body {
     }
 
     .input-section {
-        padding: 15px;
+        padding: 10px 10px;
     }
 
     .summary-container {
-        margin: 10px 15px 15px;
+        margin: 5px 8px 8px;
+        max-height: none;
     }
 
     .summary-content {
-        padding: 20px;
+        padding: 12px;
     }
 
     .message-content {
-        max-width: 90%;
+        max-width: 95%;
     }
 
     .toast {
